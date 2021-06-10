@@ -1,0 +1,149 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+const int NAME_LEN = 20;
+
+void ShowMenu(void); //메뉴 출력
+void MakeStudent(void);//학생 만들기
+void GiveMinuspoint(void);//벌점추가
+void GivePluspoint(void);//상점 추가
+void ShowstudentInfo(void);//학생 조회
+void ShowSubMenu(void); //보조 메뉴
+
+class Print
+{
+public:
+	void ShowAll();
+	void ShowSearch();
+	void ShowMinus();
+	void ShowPlus();
+};
+
+class POINT
+{
+private:
+	char* Reason;
+	int MinusPoint;
+	int PlusPoint;
+	int StuID;
+	char* Name;
+public:
+	POINT(int ID, int Plus,int Minus,char*name)
+		:MinusPoint(Minus),PlusPoint(Plus), StuID(ID)
+	{
+		Name = new char[strlen(name) + 1];
+		strcpy(Name, name);
+	}
+	int GetStuID() { return StuID; }
+
+	void ShowStu()
+	{
+		cout << "학번: " << StuID << endl;
+		cout << "이름: " << Name << endl;
+		cout << "상,벌점 :  :" << PlusPoint << ",";
+		cout << MinusPoint << PlusPoint - MinusPoint << endl;
+	}
+	~POINT() 
+	{
+		delete[]Name;
+		delete[] Reason;
+	}
+};
+
+POINT* PoArr[100];//저장을 위한 배열
+int PoNum = 0;//저장된 학생수
+
+int main(void)
+{
+	Print pr;
+	int choice = 0;
+	int choice2 = 0;
+	while (1)
+	{
+		ShowMenu();
+		cout << "선택: ";
+		cin >> choice;
+		cout << endl;
+		
+		switch (choice)
+		{
+		case 1:
+			MakeStudent();
+			break;
+		case 2:
+			GiveMinuspoint();
+			break;
+		case 3:
+			GivePluspoint();
+			break;
+		case 4:
+			ShowSubMenu();
+			cout << "선택: ";
+			cin >> choice2;
+			cout << endl;
+			switch (choice2)
+			{
+			case 1:
+				pr.ShowAll();
+				break;
+			case 2:
+				pr.ShowSearch();
+					break;
+			case 3:
+				pr.ShowMinus();
+				break;
+			case 4:
+				pr.ShowPlus();
+					break;
+			default:
+				cout << "잘못된 선택.." << endl;
+			}
+		case 5:
+			for (int i = 0; i <PoNum; i++)
+				delete PoArr[i];
+			return 0;
+		default:
+			cout << "잘못된 선택.." << endl;
+		}
+	}
+}
+
+void ShowMenu()
+{
+	cout << "------------Menu------------" << endl;
+	cout << "1. 학생 추가" << endl;
+	cout << "2. 벌 점" << endl;
+	cout << "3.  상 점" << endl;
+	cout << "4. 정보 출력" << endl;
+	cout << "5. 프로그램 종료" << endl;
+}
+
+void ShowSubMenu()
+{
+	cout << "---------------SubMenu------------------" << endl;
+	cout << "1. 전체 출력" << endl;
+	cout << "2. 검색 출력" << endl;
+	cout << "3. 벌점 순 출력" << endl;
+	cout << "4.상점 순 출력" << endl;
+}
+
+void MakeStudent(void)
+{
+	int ID;//학번
+	char name[NAME_LEN]; //이름
+	
+	cout << "학번: "; cin >> ID;
+	cout << "이름"; cin >> name;
+	cout << endl;
+
+	PoArr[PoNum++] = new POINT(ID, 0, 0, name);
+}
+
+void GiveMinuspoint()
+{
+	int Minus;
+	int ID;
+	cout << "[벌 점]" << endl;
+}
