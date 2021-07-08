@@ -1,0 +1,73 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+	namespace COMP_POS
+	{
+enum { CLERK = 0, SENIOR = 1, ASSIST = 2, MANAGER = 3 };
+	void ShowPositionInfo(int rank)
+	{
+		switch (rank)
+		{
+		case 0:
+			cout << "사원" << endl;
+			break;
+		case 1:
+			cout << "주임" << endl;
+		case 2:
+			cout << "대리" << endl;
+		case 3:
+			cout << "과장" << endl;
+		default:
+			break;
+		}
+	 }
+	
+	}
+
+
+class NameCard
+{
+
+private:
+	char *name;
+	char *Company;
+	char *PhoneN;
+	int rank;
+public:
+
+	NameCard(const char * my_name, const char *C_name, const char* Pnum,int RANK)
+	{
+		int len;
+		name = new char[strlen(my_name)];
+		strcpy(name, my_name);
+		Company = new char[strlen(C_name)];
+		strcpy(Company, C_name);;
+		PhoneN = new char[strlen(Pnum)];
+		strcpy(PhoneN, Pnum);
+		rank = RANK;
+	}
+
+	void ShowNameCardInfo()
+	{
+		cout << "이름: " << name;
+		cout << "회사" << Company;
+		cout << "전화번호" << PhoneN;
+        COMP_POS::ShowPositionInfo(rank);
+	}	
+
+
+
+};
+
+int main(void)
+{
+	NameCard manClerk("Lee", "ABCEng", "010-1111-2222", COMP_POS::CLERK);
+	NameCard manSENIOR("Hong", "OrangEng", "010-3333-4444", COMP_POS::SENIOR);
+	NameCard manAssist("Kim", "SoGoodcomp", "010-5555-6666", COMP_POS::ASSIST);
+	manClerk.ShowNameCardInfo();
+	manSENIOR.ShowNameCardInfo();
+	manAssist.ShowNameCardInfo();
+	return 0;
+}
