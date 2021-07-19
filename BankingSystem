@@ -11,9 +11,6 @@ void DepositMoney(void);//입 금
 void WithdrawMoney(void);//출 금
 void ShowAllAccInfo(void);//전체조회
 
-int article_len = 0;
-int* article = new int(article_len);
-
 class Account
 {
 private:
@@ -37,6 +34,12 @@ public:
 	void AcountWithdrawMoney(int money)
 	{
 		balance -= money;
+		if (balance < 0)
+		{
+			balance += money;
+			cout << "잔액 부족" << endl;
+				ShowMenu();
+		}
 		cout << "출금완료" << endl;
 	}
 	void AcountShowAllnfo()
