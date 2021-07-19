@@ -1,0 +1,67 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+namespace COMP_POS
+{
+	enum
+	{
+		CLERK = 0
+		, SENIOR = 1,
+		ASSIST = 2
+		, MANAGER = 3
+	};
+}
+class NameCard
+{
+private:
+	char* NAME;
+	char* COM_NAME;
+	char* PHONE;
+	int RANK;
+public:
+	NameCard(const char* name, const char* com_name, const char* phone, int rank)
+	{
+		NAME = new char[strlen(name)];
+		NAME = strcpy(NAME, name);
+		COM_NAME = new char[strlen(com_name)];
+		COM_NAME = strcpy(COM_NAME, com_name);
+		PHONE = new char[strlen(phone)];
+		PHONE = strcpy(PHONE, phone);
+		RANK = rank;
+	}
+	void ShowNameCardInfo()
+	{
+		cout << "이름: " << NAME << endl;
+		cout << "회사" << COM_NAME << endl;
+		cout << "전화번호" << PHONE << endl;
+		cout << "직급";
+		switch (RANK)
+		{
+		case 0:
+			cout << "사원" << endl;
+			break;
+		case 1:
+			cout << "주임" << endl;
+			break;
+		case 2:
+			cout << "대리" << endl;
+			break;
+		case 3:
+			cout << "과장" << endl;
+			break;
+		}
+
+	}
+};
+
+int main(void)
+{
+	NameCard manClerk("Lee", "ABCEng", "010-1111-2222", COMP_POS::CLERK);
+	NameCard copy1 = manClerk;
+	NameCard manCSENIOR("Hong", "OrangeEng", "010-3333-4444", COMP_POS::SENIOR);
+	NameCard copy2 = manCSENIOR;
+	copy1.ShowNameCardInfo();
+	copy2.ShowNameCardInfo();
+}
