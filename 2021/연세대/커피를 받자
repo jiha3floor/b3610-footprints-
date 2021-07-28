@@ -1,0 +1,29 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int sum = 0, discrimination = 100;
+	int MyPoint[9] = { 0, };
+	cout << "점수 입력: ";
+	for (int i = 0; i < 9; i++)
+	{
+		cin >> MyPoint[i];
+		sum += MyPoint[i];
+		if (MyPoint[i] < 0 || MyPoint[i] > 1000)
+			return 0;
+		if (i % 2 != 0)
+			discrimination += 100;
+		if (MyPoint[i] > discrimination)
+		{
+				cout << "hacker";
+				return 0;
+		}
+	}
+	if (sum >= 100)
+		cout << "draw";
+	else
+		cout << "none";
+	return 0;
+}
