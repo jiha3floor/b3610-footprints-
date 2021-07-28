@@ -1,0 +1,24 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+int main()
+{
+	int tehan[3] = { 'A','J','V' };
+	int Len = 0;
+	cin >> Len;
+	if (Len <= 1 || Len >= 200000)
+		return 0;
+	char * code = new char[Len];
+	cin >>* code;
+
+	for (int i = 0; i < Len; i++)
+	{
+		if (code[i] != 'A' && code[i] != 'J' && code[i] != 'V')
+		{
+			cout << code[i];
+		}
+	}
+	
+}
