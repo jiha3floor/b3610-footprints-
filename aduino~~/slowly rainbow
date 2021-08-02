@@ -1,0 +1,49 @@
+
+void setup() {
+
+
+}
+
+void loop() {
+  int i = 0;
+  while (i < 10000)
+  {
+    analogWrite(9, 0);
+    analogWrite(10, 255);
+    analogWrite(11, 0);
+    delay(i);
+    
+    analogWrite(9, 94);
+    analogWrite(10, 0);
+    analogWrite(11, 255);
+    delay(i);
+    
+        analogWrite(9, 228);
+    analogWrite(10, 0);
+    analogWrite(11, 255);
+    delay(i);
+    
+        analogWrite(9, 255);
+    analogWrite(10, 0);
+    analogWrite(11, 0);
+    
+    delay(i);
+    
+    analogWrite(9, 0);
+    analogWrite(10, 0);
+    analogWrite(11, 255);
+    delay(i);
+    
+        analogWrite(9, 0);
+    analogWrite(10, 255);
+    analogWrite(11, 1);
+    delay(i);
+       analogWrite(9, 0);
+    analogWrite(10, 255);
+    analogWrite(11, 95);
+    delay(i);
+    i+=10;
+  }
+
+
+}
