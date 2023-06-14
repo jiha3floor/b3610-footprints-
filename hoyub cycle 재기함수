@@ -1,0 +1,34 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+int cy = 0;
+
+int cycle(int n)
+{
+	cy++;
+	if (n % 2 == 0&& n!=0)
+	{
+		printf("%d ", n);
+		return cycle(n / 2);
+	}
+	else if (n % 2 != 0)
+	{
+		printf("%d ", n);
+		return cycle((2 * n) - 2);
+	}
+	else if (n == 0)
+	{
+		printf("%d ", n);
+		return 1;
+	}
+}
+
+int main(void)
+{
+	int n = 0;
+	scanf("%d", &n);
+	cycle(n);
+	printf("\ncycle: %d", cy);
+}
