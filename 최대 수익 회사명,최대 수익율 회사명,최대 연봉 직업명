@@ -1,0 +1,116 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+typedef struct staff
+{
+	char name[10];
+	char group[10];
+	double empolyee;
+}staff;
+
+typedef struct company
+{
+	char company_name[10];
+	double sales;
+	struct staff staff[3];
+}company;
+
+void top_profit_company(company *a)
+{
+	char top[10];
+	strcpy(top, a[0].company_name);
+	double top_sales = 0;
+	double profit[3] = { 0, };
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			profit[i] += a[i].staff[j].empolyee;//a[0] = 50000	
+		}
+		profit[i] = a[i].sales - profit[i];	
+	}
+	top_sales = profit[0];
+		for (int j = 1; j < 3; j++)
+		{
+			if (top_sales < profit[j]) 
+			{
+				strcpy(top, a[j].company_name);
+				top_sales = a[j].sales - profit[j];
+			}
+		}
+
+	printf("top profit company : %s (%.0lf)\n", top, top_sales);
+}
+
+void top_profit_rate_company(company* a)
+{
+	double profit_rate[3] = { 0, };
+	double top = 0;
+	char top_name[10] = "";
+	strcpy(top_name ,a[0].company_name);
+	double profit[3] = { 0, };
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			profit[i] += a[i].staff[j].empolyee;//a[0] = 50000
+		}
+	}
+	for (int i = 0; i < 3; i++)
+	{
+		profit_rate[i] = (profit[i] / a[i].sales) * 100;
+	}
+	top = profit_rate[0];
+	for (int i = 0; i < 3; i++)
+	{
+		if (top > profit_rate[i])
+		{
+			strcpy(top_name, a[i].company_name);
+			top = profit_rate[i];
+		}
+	}
+	printf("top profit rate company: %s (%.1lf%%)\n", top_name, top);
+}
+
+void top_salay_empolyee(company* a)
+{
+	double top = a[0].staff[0].empolyee;
+	char name1[10];
+	char gr[10];
+	strcpy(gr, a[0].staff[0].group);
+	strcpy(name1, a[0].staff[0].name);
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if (top < a[i].staff[j].empolyee)
+			{
+				strcpy(gr, a[i].staff[j].group);
+				strcpy(name1, a[i].staff[j].name);
+				top = a[i].staff[j].empolyee;
+			}
+		}
+	}
+	printf("top salay empolyee : %s %s ", name1, gr);
+}
+
+int main(void)
+{
+	company com[3];
+	for (int i = 0; i < 3; i++)//회사
+	{
+		scanf("%s %lf", com[i].company_name, &com[i].sales);
+		for (int j = 0; j < 3; j++)
+		{
+			scanf("%s %s %lf", com[i].staff[j].name, com[i].staff[j].group, &com[i].staff[j].empolyee);
+		}
+	}
+    top_profit_company(com);
+	top_profit_rate_company(com);
+	top_salay_empolyee(com);
+	return 0;
+}
